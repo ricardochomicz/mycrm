@@ -80,7 +80,7 @@ class Tenant extends Model
         if ($this->logo == '') {
             return Storage::url(config('app.cdn_storage') . '/avatar/avatar.png');
         }
-        return Storage::url($this->logo);
+        return Storage::url('/storage/'.$this->logo);
     }
 
 }
