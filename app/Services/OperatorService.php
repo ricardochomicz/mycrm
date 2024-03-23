@@ -12,9 +12,9 @@ class OperatorService
         return Operator::get(['id', 'name']);
     }
 
-    public function index()
+    public function index($data)
     {
-
+        return Operator::filter($data)->paginate();
     }
 
     public function store($data): bool
