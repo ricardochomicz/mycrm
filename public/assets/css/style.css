@@ -1,0 +1,207 @@
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+    width: 100%!important;
+    border: 1px solid #ced4da!important;
+    border-radius: .25rem!important;
+}
+
+.overlay {
+    border-radius: .25rem;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, .7);
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    z-index: 50;
+}
+
+.material-switch > input[type="checkbox"] {
+    display: none;
+}
+
+.material-switch > label {
+    cursor: pointer;
+    height: 0px;
+    position: relative;
+    width: 40px;
+}
+
+.material-switch > label::before {
+    background: rgb(0, 0, 0);
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    content: '';
+    height: 16px;
+    margin-top: -8px;
+    position:absolute;
+    opacity: 0.3;
+    transition: all 0.4s ease-in-out;
+    width: 40px;
+}
+.material-switch > label::after {
+    background: rgb(255, 255, 255);
+    border-radius: 16px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    content: '';
+    height: 24px;
+    left: -4px;
+    margin-top: -8px;
+    position: absolute;
+    top: -4px;
+    transition: all 0.3s ease-in-out;
+    width: 24px;
+}
+.material-switch > input[type="checkbox"]:checked + label::before {
+    background: inherit;
+    opacity: 0.5;
+}
+.material-switch > input[type="checkbox"]:checked + label::after {
+    background: inherit;
+    left: 20px;
+}
+.label-primary {
+    background-color: #428bca;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+    float:left;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input.default:checked + .slider {
+    background-color: #444;
+}
+input.primary:checked + .slider {
+    background-color: #2196F3;
+}
+input.success:checked + .slider {
+    background-color: #8bc34a;
+}
+input.info:checked + .slider {
+    background-color: #3de0f5;
+}
+input.warning:checked + .slider {
+    background-color: #FFC107;
+}
+input.danger:checked + .slider {
+    background-color: #f44336;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+
+.tooltips {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltips:before {
+    content: attr(data-text);
+    position: absolute;
+    bottom: 80%;
+    margin-bottom: 15px;
+
+    left: 50%;
+    transform: translateX(-50%);
+
+    padding: 8px;
+    border-radius: 6px;
+    background: #000;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    display: none;
+}
+
+.tooltips:hover:before {
+    display:block;
+}
+
+.tooltips:after {
+    content: "";
+    position: absolute;
+
+    bottom: 90%;
+    margin-bottom: 6px;
+
+    left: calc(50% - 10px);
+    transform: translateX(-50%);
+    rotate: 270deg;
+
+    border: 10px solid;
+    border-color: transparent black transparent transparent;
+
+    display: none;
+}
+
+.tooltips:hover:before, .tooltips:hover:after {
+    display: block;
+}
+
+
+
+
