@@ -13,9 +13,9 @@ services:
     environment:
       SERVICE_NAME: app
       SERVICE_TAGS: dev
-    working_dir: /var/www/financeiro
+    working_dir: /var/www/mycrm
     volumes:
-      - ./:/var/www/financeiro
+      - ./:/var/www/mycrm
       - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - app-network
@@ -26,12 +26,12 @@ services:
     container_name: webserver
     restart: unless-stopped
     tty: true
-    working_dir: /var/www/financeiro
+    working_dir: /var/www/mycrm
     ports:
       - "8082:80"
     volumes:
       - ./nginx/conf.d/app.conf:/etc/nginx/conf.d/app.conf
-      - ./:/var/www/financeiro
+      - ./:/var/www/mycrm
     networks:
       - app-network
 
