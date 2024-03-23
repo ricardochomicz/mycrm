@@ -346,6 +346,11 @@ return [
                     'url'  => 'app/teams',
                     'icon' => 'fas fa-fw fa-users mr-2',
                 ],
+                [
+                    'text' => 'Operadoras',
+                    'url'  => 'app/operators',
+                    'icon' => 'fas fa-fw fa-signal mr-2',
+                ],
             ],
         ],
         [
