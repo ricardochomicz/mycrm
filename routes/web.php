@@ -70,6 +70,14 @@ Route::group(['middleware' => 'auth', 'prefix' => 'app'], function () {
     Route::get('teams/{id}/members', [\App\Http\Controllers\TeamController::class, 'members'])->name('teams.members.index');
     Route::get('teams/{id}/members/edit', [\App\Http\Controllers\TeamController::class, 'editMembers'])->name('teams.members.edit');
 
+    Route::get('operators/{id}/edit', [\App\Http\Controllers\OperatorController::class, 'edit'])->name('operators.edit');
+    Route::put('operators/{id}', [\App\Http\Controllers\OperatorController::class, 'update'])->name('operators.update');
+    Route::get('operators/create', [\App\Http\Controllers\OperatorController::class, 'create'])->name('operators.create');
+    Route::post('operators', [\App\Http\Controllers\OperatorController::class, 'store'])->name('operators.store');
+    Route::get('operators', [\App\Http\Controllers\OperatorController::class, 'index'])->name('operators.index');
+    Route::get('operators/{id}/destroy', [\App\Http\Controllers\OperatorController::class, 'destroy'])->name('operators.destroy');
+
+
     Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index');
 
 });
