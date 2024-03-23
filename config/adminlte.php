@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'MyFinances',
+    'title' => 'MyCRM',
     'title_prefix' => '',
     'title_postfix' => '',
 
