@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Classification;
+use App\Models\Operator;
 use App\Models\Plan;
 use App\Models\Role;
 use App\Models\Tenant;
@@ -101,5 +103,31 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $user->roles()->attach(1); //SuperAdmin
+
+        $operators = [
+            [
+                'name' => 'CLARO',
+            ],
+            [
+                'name' => 'TIM',
+            ],
+            [
+                'name' => 'VIVO',
+            ],
+            [
+                'name' => 'OI',
+            ],
+        ];
+
+        foreach ($operators as $op) {
+            Operator::create($op);
+        }
+
+        Classification::create([
+            'name' => 'DEFAULT',
+            'months' => 24,
+            'tenant_id' => $tenant->id
+        ]);
+
     }
 }

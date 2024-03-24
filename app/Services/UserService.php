@@ -10,6 +10,15 @@ use Illuminate\Support\Str;
 
 class UserService
 {
+    public function toSelect($data = [])
+    {
+        return User::where('tenant_id', auth()->user()->tenant->id)
+            ->whereHas('roles', function ($query) {
+                $query->where('role_id', 6); //user
+            })
+            ->orderBy('name')->get(['id', 'name']);
+    }
+
     public function toSelectSupervisor()
     {
         return User::where('tenant_id', auth()->user()->tenant->id)

@@ -37,7 +37,7 @@
                 @endphp
                 <option data-content="<span class='badge badge-light' style='font-size:14px'>{{$op->name}}</span>" value="{{$idOP}}" @if(in_array($idOP, $selectedValues)) selected @endif>{{$op->name}}</option>
             @else
-                <option value="{{$idOP}}" @selected($value == $idOP)>{{$op->name}}</option>
+                <option value="{{$idOP}}" @selected($value == $idOP)>{{$op->name}} @if($op->text) {{$op->text}}M @endif</option>
             @endif
         @endforeach
     </select>

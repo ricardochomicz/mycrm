@@ -77,6 +77,21 @@ Route::group(['middleware' => 'auth', 'prefix' => 'app'], function () {
     Route::get('operators', [\App\Http\Controllers\OperatorController::class, 'index'])->name('operators.index');
     Route::get('operators/{id}/destroy', [\App\Http\Controllers\OperatorController::class, 'destroy'])->name('operators.destroy');
 
+    Route::get('classifications/{id}/edit', [\App\Http\Controllers\ClassificationController::class, 'edit'])->name('classifications.edit');
+    Route::put('classifications/{id}', [\App\Http\Controllers\ClassificationController::class, 'update'])->name('classifications.update');
+    Route::get('classifications/create', [\App\Http\Controllers\ClassificationController::class, 'create'])->name('classifications.create');
+    Route::post('classifications', [\App\Http\Controllers\ClassificationController::class, 'store'])->name('classifications.store');
+    Route::get('classifications', [\App\Http\Controllers\ClassificationController::class, 'index'])->name('classifications.index');
+    Route::get('classifications/{id}/destroy', [\App\Http\Controllers\ClassificationController::class, 'destroy'])->name('classifications.destroy');
+
+    Route::get('clients/{doc}/document', [\App\Http\Controllers\ClientController::class, 'getClientDocument'])->name('clients.document');
+    Route::get('clients/{id}/edit', [\App\Http\Controllers\ClientController::class, 'edit'])->name('clients.edit');
+    Route::put('clients/{id}', [\App\Http\Controllers\ClientController::class, 'update'])->name('clients.update');
+    Route::get('clients/create', [\App\Http\Controllers\ClientController::class, 'create'])->name('clients.create');
+    Route::post('clients', [\App\Http\Controllers\ClientController::class, 'store'])->name('clients.store');
+    Route::get('clients', [\App\Http\Controllers\ClientController::class, 'index'])->name('clients.index');
+    Route::get('clients/{id}/destroy', [\App\Http\Controllers\ClientController::class, 'destroy'])->name('clients.destroy');
+    Route::get('clients/autocomplete', [\App\Http\Controllers\ClientController::class, 'autocomplete'])->name('clients.autocomplete');
 
     Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index');
 

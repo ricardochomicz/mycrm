@@ -322,9 +322,14 @@ return [
             'submenu' => [
                 [
                     'can'  => 'isAdmin',
-                    'text' => 'Empresas',
+                    'text' => 'Minha Empresa',
                     'url'  => 'app/tenants',
                     'icon' => 'fas fa-fw fa-store mr-2',
+                ],
+                [
+                    'text' => 'Clientes',
+                    'url'  => 'app/clients',
+                    'icon' => 'fas fa-fw fa-industry mr-2',
                 ],
                 [
                     'text' => 'Fornecedores',
@@ -335,6 +340,11 @@ return [
                     'text' => 'Categorias',
                     'url'  => 'app/categories',
                     'icon' => 'fas fa-fw fa-th-list mr-2',
+                ],
+                [
+                    'text' => 'Classificação Cliente',
+                    'url'  => 'app/classifications',
+                    'icon' => 'fas fa-fw fa-list-ol mr-2',
                 ],
                 [
                     'text' => 'Usuários',
