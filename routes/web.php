@@ -84,6 +84,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'app'], function () {
     Route::get('classifications', [\App\Http\Controllers\ClassificationController::class, 'index'])->name('classifications.index');
     Route::get('classifications/{id}/destroy', [\App\Http\Controllers\ClassificationController::class, 'destroy'])->name('classifications.destroy');
 
+    Route::get('client/{uuid}/detail', [\App\Http\Controllers\ClientController::class, 'show'])->name('clients.show');
     Route::get('clients/{doc}/document', [\App\Http\Controllers\ClientController::class, 'getClientDocument'])->name('clients.document');
     Route::get('clients/{id}/edit', [\App\Http\Controllers\ClientController::class, 'edit'])->name('clients.edit');
     Route::put('clients/{id}', [\App\Http\Controllers\ClientController::class, 'update'])->name('clients.update');

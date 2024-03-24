@@ -9,6 +9,7 @@
 
         {{-- Configured left links --}}
         @each('adminlte::partials.navbar.menu-item', $adminlte->menu('navbar-left'), 'item')
+        @include('adminlte::partials.navbar.menu-item-search-form')
 
         {{-- Custom left links --}}
         @yield('content_top_nav_left')
@@ -16,11 +17,12 @@
 
     {{-- Navbar right links --}}
     <ul class="navbar-nav ml-auto">
+
         {{-- Custom right links --}}
         @yield('content_top_nav_right')
 
         {{-- Configured right links --}}
-        @each('adminlte::partials.navbar.menu-item', $adminlte->menu('navbar-right'), 'item')
+{{--        @each('adminlte::partials.navbar.menu-item', $adminlte->menu('navbar-right'), 'item')--}}
 
         {{-- User menu link --}}
         @if(Auth::user())
@@ -32,9 +34,9 @@
         @endif
 
         {{-- Right sidebar toggler link --}}
-        @if(config('adminlte.right_sidebar'))
-            @include('adminlte::partials.navbar.menu-item-right-sidebar-toggler')
-        @endif
+{{--        @if(config('adminlte.right_sidebar'))--}}
+{{--            @include('adminlte::partials.navbar.menu-item-right-sidebar-toggler')--}}
+{{--        @endif--}}
     </ul>
 
 </nav>

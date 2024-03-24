@@ -47,6 +47,20 @@ class ClientController extends Controller
         }
     }
 
+    public function show($uuid)
+    {
+        $client = Client::with('user', 'operator')
+            ->where(['tenant_id' => auth()->user()->tenant->id, 'uuid' => $uuid])->first();
+        if (!$client) {
+            flash()->addError('Registro não encontrado.');
+            return back();
+        }
+
+        return view('clients.show', [
+            'client' => $client,
+        ]);
+    }
+
     public function edit($id)
     {
         $client = $this->clientService->get($id);
