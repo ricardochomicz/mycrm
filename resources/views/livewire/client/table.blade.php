@@ -42,7 +42,7 @@
                             <td>{{$d->name}}
                                 <br><small id="document" class="tooltips" style="cursor: pointer" data-text="Copiar" onclick="copy({{$d->document}}, $event)">{{$d->document}}</small>
                             </td>
-                            <td class="text-center">{{$d->operator->name}}</td>
+                            <td class="text-center">{{$d->operator?->name}}</td>
                             <td>{{$d->city}}</td>
                             <td>{{$d->created_at}}</td>
                             <td class="text-center">
@@ -51,6 +51,10 @@
                                     <a href="{{route('clients.edit', $d->id)}}"
                                        class="btn btn-primary btn-sm tooltips" data-text="Editar">
                                         <i class="fas fa-sync-alt"></i>
+                                    </a>
+                                    <a href="{{route('clients.show', $d->uuid)}}"
+                                       class="btn btn-secondary btn-sm tooltips" data-text="Detalhes">
+                                        <i class="fas fa-folder-open"></i>
                                     </a>
                                     <a href="javascript:void(0)"
                                        onclick="ativaDesativa('{{route('clients.destroy',  $d->id)}}', 'desativar', '{{$d->name}}')"

@@ -321,22 +321,6 @@ return [
             'icon'    => 'fas fa-fw fa-folder-plus mr-2',
             'submenu' => [
                 [
-                    'can'  => 'isAdmin',
-                    'text' => 'Minha Empresa',
-                    'url'  => 'app/tenants',
-                    'icon' => 'fas fa-fw fa-store mr-2',
-                ],
-                [
-                    'text' => 'Clientes',
-                    'url'  => 'app/clients',
-                    'icon' => 'fas fa-fw fa-industry mr-2',
-                ],
-                [
-                    'text' => 'Fornecedores',
-                    'url'  => 'app/providers',
-                    'icon' => 'fas fa-fw fa-people-carry mr-2',
-                ],
-                [
                     'text' => 'Categorias',
                     'url'  => 'app/categories',
                     'icon' => 'fas fa-fw fa-th-list mr-2',
@@ -347,9 +331,9 @@ return [
                     'icon' => 'fas fa-fw fa-list-ol mr-2',
                 ],
                 [
-                    'text' => 'Usuários',
-                    'url'  => 'app/users',
-                    'icon' => 'fas fa-fw fa-user-circle mr-2',
+                    'text' => 'Clientes',
+                    'url'  => 'app/clients',
+                    'icon' => 'fas fa-fw fa-industry mr-2',
                 ],
                 [
                     'text' => 'Equipes',
@@ -357,9 +341,35 @@ return [
                     'icon' => 'fas fa-fw fa-users mr-2',
                 ],
                 [
+                    'text' => 'Fornecedores',
+                    'url'  => 'app/providers',
+                    'icon' => 'fas fa-fw fa-people-carry mr-2',
+                ],
+                [
+                    'can'  => 'isAdmin',
+                    'text' => 'Minha Empresa',
+                    'url'  => 'app/tenants',
+                    'icon' => 'fas fa-fw fa-store mr-2',
+                ],
+                [
                     'text' => 'Operadoras',
                     'url'  => 'app/operators',
                     'icon' => 'fas fa-fw fa-signal mr-2',
+                ],
+                [
+                    'text' => 'Produtos',
+                    'url'  => 'app/products',
+                    'icon' => 'fas fa-fw fa-barcode mr-2',
+                ],
+                [
+                    'text' => 'Tipo Pedido',
+                    'url'  => 'app/order-types',
+                    'icon' => 'fas fa-fw fa-vote-yea mr-2',
+                ],
+                [
+                    'text' => 'Usuários',
+                    'url'  => 'app/users',
+                    'icon' => 'fas fa-fw fa-user-circle mr-2',
                 ],
             ],
         ],
@@ -374,14 +384,20 @@ return [
                     'icon' => 'fas fa-fw fa-credit-card mr-2',
                 ],
                 [
-                    'text' => 'Lançamento NF',
-                    'url'  => '#',
-                    'icon' => 'fas fa-fw fa-file-invoice-dollar mr-2',
-                ],
-                [
                     'text' => 'Contas Pagar/Receber',
                     'url'  => '#',
                     'icon' => 'fas fa-fw fa-cash-register mr-2',
+                ],
+                [
+                    'can'  => 'isAdmin',
+                    'text' => 'Fator Comissão',
+                    'url'  => 'app/factors',
+                    'icon' => 'fas fa-fw fa-percent mr-2',
+                ],
+                [
+                    'text' => 'Lançamento NF',
+                    'url'  => '#',
+                    'icon' => 'fas fa-fw fa-file-invoice-dollar mr-2',
                 ],
             ],
         ],

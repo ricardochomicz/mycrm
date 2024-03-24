@@ -8,37 +8,43 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Classification extends Model
+class Factor extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name', 'months', 'tenant_id'];
+    protected $fillable = [
+        'factor',
+        'tenant_id',
+        'operator_id',
+        'ordertype_id'
+    ];
 
     public function tenant(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Tenant::class);
     }
 
-    public function scopeWhereTenantId($query, $tenant_id) {
-        return $query->where("tenant_id", $tenant_id);
+    public function operator(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Operator::class);
+    }
+
+    public function ordertype(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(OrderType::class);
     }
 
     public function scopeFilter($query, array $filters): void
     {
-        $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->whereAny(['name', 'months'], 'LIKE', '%' . $search . '%');
+        $query->when($filters['operator'] ?? null, function ($query, $operator) {
+            $query->where('operator_id', $operator);
+        })->when($filters['type'] ?? null, function ($query, $type) {
+            $query->where('ordertype_id', $type);
         })->when($filters['trashed'] ?? null, function ($query, $trashed) {
             if ($trashed === 'only') {
                 $query->onlyTrashed();
             }
         });
-    }
-
-    protected function name(): Attribute
-    {
-        return Attribute::make(
-            set: fn (string $value) => mb_strtoupper($value, 'UTF-8'),
-        );
     }
 
     protected function createdAt(): Attribute

@@ -47,8 +47,8 @@ class ClassificationController extends Controller
     public function edit($id): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
     {
         $classification = $this->classificationService->get($id);
-        if(!$classification || $classification->id === 1){
-            flash()->addError('Ops! Classificação não encontrada, ou registro não pode ser editado.');
+        if(!$classification){
+            flash()->addError('Ops! Classificação não encontrada.');
             return back();
         }
         $view = [

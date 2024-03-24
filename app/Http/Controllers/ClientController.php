@@ -56,9 +56,11 @@ class ClientController extends Controller
             return back();
         }
 
-        return view('clients.show', [
-            'client' => $client,
-        ]);
+        $view = [
+            'client' => $client
+        ];
+
+        return view('app.clients.show', $view);
     }
 
     public function edit($id)

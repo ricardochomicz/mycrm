@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Classification;
 use App\Models\Operator;
+use App\Models\OrderType;
 use App\Models\Plan;
 use App\Models\Role;
 use App\Models\Tenant;
@@ -104,30 +105,28 @@ class DatabaseSeeder extends Seeder
 
         $user->roles()->attach(1); //SuperAdmin
 
-        $operators = [
+        $types = [
             [
-                'name' => 'CLARO',
+                'name' => 'NOVO',
+                'tenant_id' => $tenant->id
             ],
             [
-                'name' => 'TIM',
+                'name' => 'PORTABILIDADE',
+                'tenant_id' => $tenant->id
             ],
             [
-                'name' => 'VIVO',
+                'name' => 'RENOVAÇÃO',
+                'tenant_id' => $tenant->id
             ],
             [
-                'name' => 'OI',
+                'name' => 'INTENET MÓVEL',
+                'tenant_id' => $tenant->id
             ],
         ];
 
-        foreach ($operators as $op) {
-            Operator::create($op);
+        foreach ($types as $t) {
+            OrderType::create($t);
         }
-
-        Classification::create([
-            'name' => 'DEFAULT',
-            'months' => 24,
-            'tenant_id' => $tenant->id
-        ]);
 
     }
 }

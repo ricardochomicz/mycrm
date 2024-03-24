@@ -23,7 +23,6 @@ class ClientService
             DB::beginTransaction();
             $data['tenant_id'] = auth()->user()->tenant->id;
             $data['user_id'] = auth()->user()->id;
-            $data['classification_id'] = 1;
             $client = new Client($data);
             $client->save();
             DB::commit();

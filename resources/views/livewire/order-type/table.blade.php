@@ -24,11 +24,11 @@
             <div class="table-responsive rounded">
 
                 <table class="table table-borderless table-hover">
-                    <caption><small>Categorias cadastradas <b>{{$data->count()}}</b></small></caption>
+                    <caption><small>Tipo Pedido cadastrados <b>{{$data->count()}}</b></small></caption>
                     <thead class="bg-gray-light">
                     <tr>
                         <th>#</th>
-                        <th>Categoria</th>
+                        <th>Tipo Pedido</th>
                         <th>Criado em</th>
                         <th class="text-center" width="15%">...</th>
                     </tr>
@@ -42,18 +42,18 @@
                             <td class="text-center">
 
                                 @if($d->deleted_at === null)
-                                    <a href="{{route('categories.edit', $d->id)}}"
+                                    <a href="{{route('order-types.edit', $d->id)}}"
                                        class="btn btn-primary btn-sm tooltips" data-text="Editar">
                                         <i class="fas fa-sync-alt"></i>
                                     </a>
                                     <a href="javascript:void(0)"
-                                       onclick="ativaDesativa('{{route('categories.destroy',  $d->id)}}', 'desativar', '{{$d->name}}')"
+                                       onclick="ativaDesativa('{{route('order-types.destroy',  $d->id)}}', 'desativar', '{{$d->name}}')"
                                        class="btn btn-danger btn-sm tooltips" data-text="Desativar">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 @else
                                     <a href="javascript:void(0)"
-                                       onclick="ativaDesativa('{{route('categories.destroy',  $d->id)}}', 'ativar', '{{$d->name}}')"
+                                       onclick="ativaDesativa('{{route('order-types.destroy',  $d->id)}}', 'ativar', '{{$d->name}}')"
                                        class="btn btn-secondary btn-sm tooltips" data-text="Ativar">
                                         <i class="fas fa-trash-restore"></i>
                                     </a>

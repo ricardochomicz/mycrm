@@ -18,7 +18,7 @@
     @if($label!='')
         <label for="{{$id}}" class="form-label">{{$label}}</label>
     @endif
-    <select id="{{$id}}" class="selectpicker"
+    <select id="{{$id}}" class="selectpicker" data-live-search="true"
             name="{{$name}}"
             {{ $attributes->class([ 'is-invalid' => $errors->has(str_replace('[]', '', $name))]) }}  @if($style!='') style="{{$style}}" @endif>
         @if(!isset($attributes['multiple'])  && !isset($attributes['NotTextSelect']) )

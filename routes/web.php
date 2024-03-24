@@ -94,6 +94,30 @@ Route::group(['middleware' => 'auth', 'prefix' => 'app'], function () {
     Route::get('clients/{id}/destroy', [\App\Http\Controllers\ClientController::class, 'destroy'])->name('clients.destroy');
     Route::get('clients/autocomplete', [\App\Http\Controllers\ClientController::class, 'autocomplete'])->name('clients.autocomplete');
 
+    Route::get('order-types/{id}/edit', [\App\Http\Controllers\OrderTypeController::class, 'edit'])->name('order-types.edit');
+    Route::put('order-types/{id}', [\App\Http\Controllers\OrderTypeController::class, 'update'])->name('order-types.update');
+    Route::get('order-types/create', [\App\Http\Controllers\OrderTypeController::class, 'create'])->name('order-types.create');
+    Route::post('order-types', [\App\Http\Controllers\OrderTypeController::class, 'store'])->name('order-types.store');
+    Route::get('order-types', [\App\Http\Controllers\OrderTypeController::class, 'index'])->name('order-types.index');
+    Route::get('order-types/{id}/destroy', [\App\Http\Controllers\OrderTypeController::class, 'destroy'])->name('order-types.destroy');
+
+
+    Route::get('factors/{id}/edit', [\App\Http\Controllers\FactorController::class, 'edit'])->name('factors.edit');
+    Route::put('factors/{id}', [\App\Http\Controllers\FactorController::class, 'update'])->name('factors.update');
+    Route::get('factors/create', [\App\Http\Controllers\FactorController::class, 'create'])->name('factors.create');
+    Route::post('factors', [\App\Http\Controllers\FactorController::class, 'store'])->name('factors.store');
+    Route::get('factors', [\App\Http\Controllers\FactorController::class, 'index'])->name('factors.index');
+    Route::get('factors/{id}/destroy', [\App\Http\Controllers\FactorController::class, 'destroy'])->name('factors.destroy');
+
+
+    Route::get('products/{id}/edit', [\App\Http\Controllers\ProductController::class, 'edit'])->name('products.edit');
+    Route::put('products/{id}', [\App\Http\Controllers\ProductController::class, 'update'])->name('products.update');
+    Route::get('products/create', [\App\Http\Controllers\ProductController::class, 'create'])->name('products.create');
+    Route::post('products', [\App\Http\Controllers\ProductController::class, 'store'])->name('products.store');
+    Route::get('products', [\App\Http\Controllers\ProductController::class, 'index'])->name('products.index');
+    Route::get('products/{id}/destroy', [\App\Http\Controllers\ProductController::class, 'destroy'])->name('products.destroy');
+
+
     Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index');
 
 });

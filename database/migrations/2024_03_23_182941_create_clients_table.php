@@ -16,9 +16,9 @@ return new class extends Migration
             $table->uuid();
             $table->unsignedBigInteger('tenant_id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('operator_id');
+            $table->unsignedBigInteger('operator_id')->nullable();
             $table->unsignedBigInteger('classification_id')->nullable();
-            $table->string('document')->unique();
+            $table->string('document');
             $table->string('name');
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
