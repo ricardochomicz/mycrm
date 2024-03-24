@@ -89,9 +89,19 @@
         })
 
         function getClient(doc) {
+            let baseUrl = '';
+
+            if ("{{ app()->environment() }}" === 'local') {
+                baseUrl = 'http://localhost:8082';
+            } else {
+                baseUrl = 'https://42telecom.com.br/mycrm';
+            }
+
+            let url = baseUrl + '/app/clients/' + doc + '/document';
+
             if (doc.length === 14) {
                 $.ajax({
-                    url: '/app/clients/' + doc + '/document',
+                    url: url,
                     method: "GET",
                     success: function (data) {
                         console.log(data)
