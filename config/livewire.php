@@ -157,5 +157,5 @@ return [
 
     'pagination_theme' => 'tailwind',
 
-    'asset_url' =>  env('APP_URL', 'https://42telecom.com.br/mycrm/composer/laravel/livewire/public/vendor/livewire/livewire.js'),
+    'asset_url' =>  env('APP_URL', 'https://42telecom.com.br/mycrm/public/livewire/livewire.js'),
 ];
