@@ -15,7 +15,7 @@ class Table extends Component
 
     protected $listeners = ['resetSelectpicker' => '$refresh'];
 
-    protected array $queryString = [
+    protected $queryString = [
         'filters.search' => ['except' => ''],
         'filters.trashed' => ['except' => ''],
     ];

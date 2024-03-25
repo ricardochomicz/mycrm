@@ -9,31 +9,35 @@ use Livewire\WithPagination;
 class Table extends Component
 {
     use WithPagination;
-    protected string $paginationTheme = 'bootstrap';
+    protected $paginationTheme = 'bootstrap';
 
-    public array $filters = ['search', 'trashed'];
+    public $search = '';
+    public $trashed = '';
 
     protected $listeners = ['resetSelectpicker' => '$refresh'];
 
-    protected function queryString(): array
-    {
-        return [
-            'filters.search' => ['except' => ''],
-            'filters.trashed' => ['except' => ''],
-        ];
-    }
+    protected $queryString = [
+        'search' => ['except' => ''],
+        'trashed' => ['except' => ''],
+    ];
 
-    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    public function render()
     {
         $categories = new CategoryService();
-        return view('livewire.category.table', [
-            'data' => $categories->index($this->filters),
-        ]);
+        $filters = [
+            'search' => $this->search,
+            'trashed' => $this->trashed
+        ];
+        $view = [
+           'data' => $categories->index($filters)
+        ];
+        return view('livewire.category.table',$view);
     }
 
     public function clearFilter(): void
     {
-        $this->filters = [];
+        $this->search = '';
+        $this->trashed = '';
         $this->dispatch('resetSelectpicker');
     }
 }

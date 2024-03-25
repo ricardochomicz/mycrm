@@ -5,11 +5,11 @@
             <h6><i class="fas fa-filter"></i> Filtros</h6>
             <div class="row">
                 <div class="form-group col-sm-6 has-search">
-                    <input wire:model.live="filters.search" class="form-control" name="search"
+                    <input wire:model.live="search" class="form-control" name="search"
                            placeholder="pesquisa por nome...">
                 </div>
                 <div class="form-group col-sm-3" wire:ignore>
-                    <select name="trashed" data-live-search="true" title="Status" id="sel1" wire:model.live="filters.trashed"
+                    <select name="trashed" data-live-search="true" title="Status" id="sel1" wire:model.live="trashed"
                             class="selectpicker">
                         <option value="only">Inativos</option>
                     </select>
