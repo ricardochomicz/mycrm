@@ -101,8 +101,10 @@
             $("[name='my-checkbox']").bootstrapSwitch();
         });
 
-        Livewire.on('resetSelectpicker', function () {
-            $("#sel1, #sel2").selectpicker('val', '') // Ou qualquer outra lógica de redefinição necessária
+        document.addEventListener('livewire:init', () => {
+            Livewire.on('resetSelectpicker', (event) => {
+                $("#sel1, #sel2").selectpicker('val', '') // Ou qualquer outra lógica de redefinição necessária
+            });
         });
 
     </script>
