@@ -15,10 +15,13 @@ class Table extends Component
 
     protected $listeners = ['resetSelectpicker' => '$refresh'];
 
-    protected array $queryString = [
-        'filters.search' => ['except' => ''],
-        'filters.trashed' => ['except' => ''],
-    ];
+    protected function queryString(): array
+    {
+        return [
+            'filters.search' => ['except' => ''],
+            'filters.trashed' => ['except' => ''],
+        ];
+    }
 
     public function render(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
