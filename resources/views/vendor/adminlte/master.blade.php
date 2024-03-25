@@ -101,14 +101,7 @@
 {{-- Extra Configured Plugins Scripts --}}
 @include('adminlte::plugins', ['type' => 'js'])
 
-@if (config('adminlte.livewire'))
-    @if (app()->version() >= 7)
-        <script src="/livewire/livewire.js"></script>
-    @else
-        <script src="/livewire/livewire.js"></script>
-    @endif
-@endif
-
+@livewireScripts
 
 {{-- Custom Scripts --}}
 @yield('adminlte_js')
