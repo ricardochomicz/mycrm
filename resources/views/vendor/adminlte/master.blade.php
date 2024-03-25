@@ -105,7 +105,7 @@
     @if (app()->version() >= 7)
         @livewireScripts
     @else
-        <livewire:styles />
+        <livewire:scripts />
     @endif
 @endif
 
@@ -114,13 +114,10 @@
 <script src="{{asset('assets/js/inputmask.js')}}"></script>
 <script src="{{asset('assets/js/inputmask.binding.js')}}"></script>
 <script src="{{asset('assets/js/bootstrap-select.min.js')}}"></script>
-<script src="https://42telecom.com.br/mycrm/livewire/livewire.js"></script>
+{{--<script src="https://42telecom.com.br/mycrm/livewire/livewire.js"></script>--}}
 
 
 @stack('scripts')
-
-
-
 
 </body>
 
