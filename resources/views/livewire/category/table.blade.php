@@ -73,8 +73,10 @@
 
 @push('scripts')
     <script>
-        Livewire.on('resetSelectpicker', function () {
-            $("#sel1").selectpicker('val', '') // Ou qualquer outra lógica de redefinição necessária
+        document.addEventListener('livewire:init', () => {
+            Livewire.on('resetSelectpicker', (event) => {
+                $("#sel1").selectpicker('val', '') // Ou qualquer outra lógica de redefinição necessária
+            });
         });
     </script>
 @endpush
