@@ -157,5 +157,4 @@ return [
 
     'pagination_theme' => 'tailwind',
 
-    'asset_url' =>  'https://42telecom.com.br/mycrm/public/livewire/livewire.js',
 ];

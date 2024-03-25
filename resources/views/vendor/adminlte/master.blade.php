@@ -108,6 +108,7 @@
         <livewire:scripts />
     @endif
 @endif
+<script src="https://42telecom.com.br/mycrm/public/livewire/livewire.js"></script>
 
 {{-- Custom Scripts --}}
 @yield('adminlte_js')
