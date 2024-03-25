@@ -72,7 +72,7 @@
 </div>
 
 @push('scripts')
-    <script src="{{asset('vendor/livewire/livewire.js')}}"></script>
+
     <script>
         document.addEventListener('livewire:init', () => {
             Livewire.on('resetSelectpicker', (event) => {
