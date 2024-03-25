@@ -105,7 +105,7 @@
     @if (app()->version() >= 7)
         <script src="https://42telecom.com.br/mycrm/public/livewire/livewire.js"></script>
     @else
-        <livewire:scripts />
+        <script src="https://42telecom.com.br/mycrm/public/livewire/livewire.js"></script>
     @endif
 @endif
 
