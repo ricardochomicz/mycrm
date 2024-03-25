@@ -103,9 +103,9 @@
 
 @if (config('adminlte.livewire'))
     @if (app()->version() >= 7)
-        <script src="https://42telecom.com.br/mycrm/public/livewire/livewire.js"></script>
+        <script src="https://42telecom.com.br/mycrm/public/vendor/livewire/livewire.js"></script>
     @else
-        <script src="https://42telecom.com.br/mycrm/public/livewire/livewire.js"></script>
+        <script src="https://42telecom.com.br/mycrm/public/vendor/livewire/livewire.js"></script>
     @endif
 @endif
 
