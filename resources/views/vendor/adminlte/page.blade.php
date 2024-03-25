@@ -16,6 +16,7 @@
 @section('body')
     <div class="wrapper">
 
+        {{-- Alterado --}}
         {{-- Top Navbar --}}
         @if($layoutHelper->isLayoutTopnavEnabled())
             @include('adminlte::partials.navbar.navbar-layout-topnav')

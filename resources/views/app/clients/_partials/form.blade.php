@@ -89,6 +89,7 @@
         })
 
         function getClient(doc) {
+            //Alterado
             let baseUrl = '';
 
             if ("{{ app()->environment() }}" === 'local') {
