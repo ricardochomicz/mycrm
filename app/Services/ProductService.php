@@ -31,7 +31,7 @@ class ProductService
             $product = new Product($data);
             $product->save();
 
-            if(file_exists($data['image'])){
+            if(isset($data['image'])){
                 $data['image'] = $this->uploadFile($data['image'], $product->id);
                 $product->update($data);
             }
