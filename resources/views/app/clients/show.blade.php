@@ -42,7 +42,7 @@
                         <address>
                             Operadora Atual: <strong>{{ $client->operator?->name }}</strong><br/>
                             Classificação:
-                            <strong>{{ $client->classification?->name }} {{$client->classification?->months}} ?? M
+                            <strong>{{ $client->classification?->name }} {{$client->classification?->months}}
                                 </strong><br/>
                             Número Cliente: <strong>{{ $client->number_client }}</strong><br/>
                             Senha Cliente: <strong>{{ $client->password_client }}</strong><br/>
