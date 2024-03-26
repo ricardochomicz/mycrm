@@ -4,18 +4,6 @@
     border-radius: .25rem!important;
 }
 
-.overlay {
-    border-radius: .25rem;
-    -ms-flex-align: center;
-    align-items: center;
-    background-color: rgba(255, 255, 255, .7);
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-pack: center;
-    justify-content: center;
-    z-index: 50;
-}
-
 .material-switch > input[type="checkbox"] {
     display: none;
 }

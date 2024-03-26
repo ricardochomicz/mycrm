@@ -7,19 +7,19 @@
             <div class="row">
                 <div class="form-group col-sm-4 has-search">
 
-                    <input wire:model.live="filters.search" class="form-control" name="search"
+                    <input wire:model.live="search" class="form-control" name="search"
                            placeholder="pesquisa por nome...">
                 </div>
                 <div class="form-group col-sm-3" wire:ignore>
                     <select name="trashed" data-live-search="true" title="Status" id="sel1"
-                            wire:model.live="filters.trashed"
+                            wire:model.live="trashed"
                             class="selectpicker">
                         <option value="only">Inativos</option>
                     </select>
                 </div>
                 <div class="form-group col-sm-3" wire:ignore>
                     <x-select name="plan" title="Planos" data-live-search="true" id="sel2"
-                              wire:model.live="filters.plan"
+                              wire:model.live="plan"
                               :options="$plans"/>
                 </div>
                 <div class="form-group">

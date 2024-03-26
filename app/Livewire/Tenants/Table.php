@@ -13,30 +13,39 @@ class Table extends Component
     use WithPagination;
     protected string $paginationTheme = 'bootstrap';
 
-
-    public array $filters = ['search', 'trashed', 'plan'];
+    public string $search = '';
+    public string $trashed = '';
+    public string $plan = '';
 
     protected $listeners = ['resetSelectpicker' => '$refresh'];
 
     protected $queryString = [
-        'filters.search' => ['except' => ''],
-        'filters.trashed' => ['except' => ''],
-        'filters.plan' => ['except' => ''],
+        'search' => ['except' => ''],
+        'trashed' => ['except' => ''],
+        'plan' => ['except' => ''],
     ];
 
     public function render(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
+        sleep(2);
         $tenantService = new TenantService();
         $planService = new PlanService();
+        $filters = [
+            'search' => $this->search,
+            'trashed' => $this->trashed,
+            'plan' => $this->plan
+        ];
         return view('livewire.tenants.table', [
             'plans' => $planService->toSelect(),
-            'tenants' => $tenantService->index($this->filters),
+            'tenants' => $tenantService->index($filters),
         ]);
     }
 
     public function clearFilter(): void
     {
-        $this->filters = [];
-        $this->dispatch('resetSelectpicker');
+        $this->search = '';
+        $this->trashed = '';
+        $this->plan = '';
+        $this->emit('resetSelectpicker');
     }
 }

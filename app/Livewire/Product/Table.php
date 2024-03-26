@@ -13,15 +13,18 @@ class Table extends Component
     use WithPagination;
     protected string $paginationTheme = 'bootstrap';
 
-    public array $filters = ['search', 'operator', 'category', 'trashed'];
+    public string $search = '';
+    public string $trashed = '';
+    public string $operator = '';
+    public string $category = '';
 
     protected $listeners = ['resetSelectpicker' => '$refresh'];
 
     protected $queryString = [
-        'filters.search' => ['except' => ''],
-        'filters.operator' => ['except' => ''],
-        'filters.category' => ['except' => ''],
-        'filters.trashed' => ['except' => ''],
+        'search' => ['except' => ''],
+        'operator' => ['except' => ''],
+        'category' => ['except' => ''],
+        'trashed' => ['except' => ''],
     ];
 
     public function render(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
@@ -29,8 +32,14 @@ class Table extends Component
         $products = new ProductService();
         $operators = new OperatorService();
         $categories = new CategoryService();
+        $filters = [
+            'search' => $this->search,
+            'trashed' => $this->trashed,
+            'operator' => $this->operator,
+            'category' => $this->category,
+        ];
         return view('livewire.product.table', [
-            'data' => $products->index($this->filters),
+            'data' => $products->index($filters),
             'operators' => $operators->toSelect(),
             'categories' => $categories->toSelect()
         ]);
@@ -38,7 +47,10 @@ class Table extends Component
 
     public function clearFilter(): void
     {
-        $this->filters = [];
-        $this->dispatch('resetSelectpicker');
+        $this->search = '';
+        $this->trashed = '';
+        $this->operator = '';
+        $this->category = '';
+        $this->emit('resetSelectpicker');
     }
 }

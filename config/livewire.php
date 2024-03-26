@@ -100,7 +100,7 @@ return [
     |
     */
 
-    'legacy_model_binding' => false,
+    'legacy_model_binding' => true,
 
     /*
     |---------------------------------------------------------------------------
@@ -113,7 +113,7 @@ return [
     |
     */
 
-    'inject_assets' => true,
+    'inject_assets' => false,
 
     /*
     |---------------------------------------------------------------------------
@@ -156,5 +156,7 @@ return [
     */
 
     'pagination_theme' => 'tailwind',
+
+    'asset_url' => env('APP_URL', 'http://localhost'),
 
 ];

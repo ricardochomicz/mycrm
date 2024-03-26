@@ -13,14 +13,16 @@ class Table extends Component
     use WithPagination;
     protected string $paginationTheme = 'bootstrap';
 
-    public array $filters = ['operator', 'type', 'trashed'];
+    public string $operator = '';
+    public string $type = '';
+    public string $trashed = '';
 
     protected $listeners = ['resetSelectpicker' => '$refresh'];
 
     protected $queryString = [
-        'filters.operator' => ['except' => ''],
-        'filters.type' => ['except' => ''],
-        'filters.trashed' => ['except' => ''],
+        'operator' => ['except' => ''],
+        'type' => ['except' => ''],
+        'trashed' => ['except' => ''],
     ];
 
     public function render(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
@@ -28,8 +30,14 @@ class Table extends Component
         $factors = new FactorService();
         $operators = new OperatorService();
         $types = new OrderTypeService();
+
+        $filters = [
+            'operator' => $this->operator,
+            'type' => $this->type,
+            'trashed' => $this->trashed
+        ];
         return view('livewire.factor.table', [
-            'data' => $factors->index($this->filters),
+            'data' => $factors->index($filters),
             'operators' => $operators->toSelect(),
             'types' => $types->toSelect()
         ]);
@@ -37,7 +45,9 @@ class Table extends Component
 
     public function clearFilter(): void
     {
-        $this->filters = [];
-        $this->dispatch('resetSelectpicker');
+        $this->operator = '';
+        $this->type = '';
+        $this->trashed = '';
+        $this->emit('resetSelectpicker');
     }
 }

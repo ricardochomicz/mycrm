@@ -11,8 +11,8 @@ class Table extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $search = '';
-    public $trashed = '';
+    public string $search = '';
+    public string $trashed = '';
 
     protected $listeners = ['resetSelectpicker' => '$refresh'];
 
@@ -28,16 +28,16 @@ class Table extends Component
             'search' => $this->search,
             'trashed' => $this->trashed
         ];
-        $view = [
-           'data' => $categories->index($filters)
-        ];
-        return view('livewire.category.table',$view);
+
+        return view('livewire.category.table',[
+            'data' => $categories->index($filters)
+        ]);
     }
 
     public function clearFilter(): void
     {
         $this->search = '';
         $this->trashed = '';
-        $this->dispatch('resetSelectpicker');
+        $this->emit('resetSelectpicker');
     }
 }

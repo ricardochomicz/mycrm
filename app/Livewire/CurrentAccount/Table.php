@@ -12,27 +12,33 @@ class Table extends Component
     use WithPagination;
     protected string $paginationTheme = 'bootstrap';
 
-    public array $filters = ['search', 'trashed'];
+    public string $search = '';
+    public string $trashed = '';
 
     protected $listeners = ['resetSelectpicker' => '$refresh'];
 
     protected $queryString = [
-        'filters.search' => ['except' => ''],
-        'filters.trashed' => ['except' => ''],
+        'search' => ['except' => ''],
+        'trashed' => ['except' => ''],
     ];
 
     public function render(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
         $accounts = new CurrentAccountService();
+        $filters = [
+            'search' => $this->search,
+            'trashed' => $this->trashed
+        ];
         return view('livewire.current-account.table', [
-            'data' => $accounts->index($this->filters),
+            'data' => $accounts->index($filters),
         ]);
     }
 
     public function clearFilter(): void
     {
-        $this->filters = [];
-        $this->dispatch('resetSelectpicker');
+        $this->search = '';
+        $this->trashed = '';
+        $this->emit('resetSelectpicker');
     }
 
 }

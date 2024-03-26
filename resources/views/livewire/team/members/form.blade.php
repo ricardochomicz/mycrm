@@ -19,34 +19,37 @@
             </div>
         </div>
         <hr>
-        <table class="table table-borderless table-hover">
-            <caption><small>Membros cadastrados na equipe <b>{{$membersCount}}</b></small></caption>
-            <thead>
-            <tr>
-                <th width="10%"></th>
-                <th>Nome</th>
-                <th>E-mail</th>
-                <th class="text-center">Telefone</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($members as $user)
+        <div class="small-box shadow-none">
+            <x-loader wire:loading.delay wire:loading.class="overlay"></x-loader>
+            <table class="table table-borderless table-hover">
+                <caption><small>Membros cadastrados na equipe <b>{{$membersCount}}</b></small></caption>
+                <thead>
                 <tr>
-                    <td>
-                        <label class="switch ">
-                            <input type="checkbox" class="primary" name="user_id[]"
-                                   wire:model="selectedUsers.{{ $user['id'] }}"
-                                   value="1" {{ in_array($user['id'], array_keys($selectedUsers)) ? 'checked' : '' }}>
-                            <span class="slider round"></span>
-                        </label>
-                    </td>
-                    <td>{{$user['name']}}</td>
-                    <td>{{$user['email']}}</td>
-                    <td class="text-center">{{$user['phone']}}</td>
+                    <th width="10%"></th>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th class="text-center">Telefone</th>
                 </tr>
-            @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                @foreach($members as $user)
+                    <tr>
+                        <td>
+                            <label class="switch ">
+                                <input type="checkbox" class="primary" name="user_id[]"
+                                       wire:model="selectedUsers.{{ $user['id'] }}"
+                                       value="1" {{ in_array($user['id'], array_keys($selectedUsers)) ? 'checked' : '' }}>
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td>{{$user['name']}}</td>
+                        <td>{{$user['email']}}</td>
+                        <td class="text-center">{{$user['phone']}}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
     <div class="card-footer">
         <button type="button" wire:click="submit" class="btn btn-primary">Salvar</button>

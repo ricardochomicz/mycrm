@@ -10,6 +10,14 @@
 
 @push('styles')
     <style>
+
+        /*.card > .overlay {*/
+        /*    position: absolute;*/
+        /*    width: 100%;*/
+        /*    height: 100%;*/
+        /*    top: 0;*/
+        /*    left: 0;*/
+        /*}*/
         .overlay {
             border-radius: .25rem;
             -ms-flex-align: center;
@@ -22,12 +30,6 @@
             z-index: 100;
         }
 
-        .card-body > .overlay {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-        }
+
     </style>
 @endpush
