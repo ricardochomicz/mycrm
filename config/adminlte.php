@@ -367,6 +367,11 @@ return [
                     'icon' => 'fas fa-fw fa-vote-yea mr-2',
                 ],
                 [
+                    'text' => 'Tipo Receita/Despesa',
+                    'url'  => 'app/revenue-expenses',
+                    'icon' => 'fas fa-fw fa-sitemap mr-2',
+                ],
+                [
                     'text' => 'Usuários',
                     'url'  => 'app/users',
                     'icon' => 'fas fa-fw fa-user-circle mr-2',

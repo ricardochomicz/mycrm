@@ -118,6 +118,14 @@ Route::group(['middleware' => 'auth', 'prefix' => 'app'], function () {
     Route::get('products/{id}/destroy', [\App\Http\Controllers\ProductController::class, 'destroy'])->name('products.destroy');
 
 
+    Route::get('revenue-expenses/{id}/edit', [\App\Http\Controllers\RevenueExpenseController::class, 'edit'])->name('revenue-expenses.edit');
+    Route::put('revenue-expenses/{id}', [\App\Http\Controllers\RevenueExpenseController::class, 'update'])->name('revenue-expenses.update');
+    Route::get('revenue-expenses/create', [\App\Http\Controllers\RevenueExpenseController::class, 'create'])->name('revenue-expenses.create');
+    Route::post('revenue-expenses', [\App\Http\Controllers\RevenueExpenseController::class, 'store'])->name('revenue-expenses.store');
+    Route::get('revenue-expenses', [\App\Http\Controllers\RevenueExpenseController::class, 'index'])->name('revenue-expenses.index');
+    Route::get('revenue-expenses/{id}/destroy', [\App\Http\Controllers\RevenueExpenseController::class, 'destroy'])->name('revenue-expenses.destroy');
+
+
     Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index');
 
 });
