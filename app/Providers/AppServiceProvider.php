@@ -34,8 +34,8 @@ class AppServiceProvider extends ServiceProvider
         Client::observe(ClientObserver::class);
         Product::observe(ProductObserver::class);
 
-        Livewire::setScriptRoute(function ($handle) {
-            return Route::get('/vendor/livewire/livewire.js', $handle);
-        });
+//        Livewire::setScriptRoute(function ($handle) {
+//            return Route::get('/vendor/livewire/livewire.js', $handle);
+//        });
     }
 }
