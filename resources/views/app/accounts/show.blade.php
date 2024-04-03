@@ -93,7 +93,7 @@
                                 <tbody>
                                 <tr>
                                     <th style="width:50%">Total:</th>
-                                    <td>R$ {{number_format($account->parcels->sum('value'), 2, ',', '.')}}</td>
+                                    <td>R$ {{$account->parcels->sum('value')}}</td>
                                 </tr>
                                 <tr>
                                     <th style="width:50%">Qtd Parcelas:</th>
