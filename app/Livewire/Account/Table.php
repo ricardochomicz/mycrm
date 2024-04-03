@@ -91,12 +91,10 @@ class Table extends Component
     {
         return AccountParcel::whereHas('account', function ($query) {
             $query->whereNotIn('revenue_expense_id', [1, 2, 3])
-                ->where(['tenant_id' => auth()->user()->tenant->id, 'payment_status' => 0])
-                ->whereBetween('payment', [$this->date_start, $this->date_end]);
+                ->where(['tenant_id' => auth()->user()->tenant->id, 'payment_status' => 0]);
                  if (!empty($this->revenue_expense)) {
                      $query->whereIn('revenue_expense_id', $this->revenue_expense);
                  }
-
         })->whereDate('due_date', '<', Carbon::now()->toDateString())->sum('value');
     }
 
