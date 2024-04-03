@@ -57,7 +57,7 @@
                                             <span class="badge bg-danger">Vencido</span><br>
                                             <small>
                                                 Vencido
-                                                à {{Carbon\Carbon::parse($d->due_date)->diffInDays(Carbon\Carbon::now())}}
+                                                à {{Carbon\Carbon::parse($p->due_date)->diffInDays(Carbon\Carbon::now())}}
                                                 dia(s)
                                             </small>
                                         @else
