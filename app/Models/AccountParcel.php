@@ -63,18 +63,32 @@ class AccountParcel extends Model
             if ($trashed === 'only') {
                 $query->onlyTrashed();
             }
+            if ($trashed === 'arrears') {
+                $query->where('payment_status', 0)
+                    ->where(function ($query) {
+                        $query->where('due_date', '<', Carbon::now()->toDateString())
+                            ->orWhereNull('due_date');
+                    });
+            }
         });
-        $query->when(!($filters['date_start'] && $filters['date_end']), function ($query) use ($filters) {
-            $query->whereMonth('due_date', Carbon::now()->month);
-        }, function ($query) use ($filters) {
-            $query->whereBetween('due_date', [$filters['date_start'], $filters['date_end']]);
-        });
+        if ($filters['trashed'] === 'arrears') {
+            $query->where('payment_status', 0)
+                ->where(function ($query) {
+                    $query->where('due_date', '<', Carbon::now()->toDateString())
+                        ->orWhereNull('due_date');
+                });
+        } else {
+            $query->when(!($filters['trashed'] || $filters['date_start'] && $filters['date_end']), function ($query) use ($filters) {
+                $query->whereMonth('due_date', Carbon::now()->month);
+            }, function ($query) use ($filters) {
+                $query->whereBetween('due_date', [$filters['date_start'], $filters['date_end']]);
+            });
+        }
     }
 
     protected function value(): Attribute
     {
         return Attribute::make(
-//            get: fn(?string $value) => (int)$value ? number_format($value, 2, ',', '.') : null,
             set: fn(?string $value) => floatval(str_replace(',', '.', str_replace('.', '', $value)))
         );
     }
@@ -82,7 +96,6 @@ class AccountParcel extends Model
     protected function paymentInterest(): Attribute
     {
         return Attribute::make(
-//            get: fn(?string $value) => is_numeric($value) ? number_format($value, 2, ',', '.') : null,
             set: fn(?string $value) => floatval(str_replace(',', '.', str_replace('.', '', $value)))
         );
     }

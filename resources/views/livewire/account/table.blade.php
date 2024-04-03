@@ -19,6 +19,7 @@
                 <div class="form-group col-sm-3" wire:ignore>
                     <select name="trashed" data-live-search="true" title="Status" id="sel1" wire:model.live="trashed"
                             class="selectpicker">
+                        <option value="arrears">Em Atraso</option>
                         <option value="only">Inativos</option>
                     </select>
                 </div>
