@@ -64,6 +64,7 @@ class AccountService
                 $data['payment_status'] = 1;
             }
 
+
             $dataUpdate = [
                 'value' => $data['value'],
                 'payment' => $data['payment'],
