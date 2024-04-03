@@ -54,7 +54,12 @@
                                         @if ($p->payment_status == 1)
                                             <span class="badge bg-success">Pago</span>
                                         @elseif ($p->due_date < Carbon\Carbon::now()->format("Y-m-d"))
-                                            <span class="badge bg-danger">Vencido</span>
+                                            <span class="badge bg-danger">Vencido</span><br>
+                                            <small>
+                                                Vencido
+                                                à {{Carbon\Carbon::parse($d->due_date)->diffInDays(Carbon\Carbon::now())}}
+                                                dia(s)
+                                            </small>
                                         @else
                                             <span class="badge bg-secondary">Aberto</span>
                                         @endif
