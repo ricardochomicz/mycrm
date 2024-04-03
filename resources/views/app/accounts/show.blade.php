@@ -24,7 +24,8 @@
                         <address>
                             <strong>Fornecedor: </strong>{{$account->provider->name}}<br>
                             <strong>Tipo Receita/Despesa: </strong>{{$account->revenueExpense->name}}<br>
-                            <strong>Data lançamento: </strong>{{Carbon\Carbon::parse($account->created_at)->format('d/m/Y')}}<br>
+                            <strong>Data
+                                lançamento: </strong>{{Carbon\Carbon::parse($account->created_at)->format('d/m/Y')}}<br>
                         </address>
                     </div>
 
@@ -93,7 +94,7 @@
                                 <tbody>
                                 <tr>
                                     <th style="width:50%">Total:</th>
-                                    <td>R$ {{$account->parcels->sum('value')}}</td>
+                                    <td>R$ {{moneyUStoBR($account->parcels->sum('value'))}}</td>
                                 </tr>
                                 <tr>
                                     <th style="width:50%">Qtd Parcelas:</th>
@@ -102,17 +103,18 @@
                                 <tr>
                                     <th>Juros/Multa:</th>
                                     <td>
-                                        R$ {{number_format($account->parcels->sum('payment_interest'), 2, ',', '.')}}</td>
+                                        R$ {{moneyUStoBR($account->parcels->sum('payment_interest'))}}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Valor pago:</th>
                                     <td>
-                                        R$ {{number_format($account->parcels->where('payment_status', 1)->sum('value'), 2, ',', '.')}}</td>
+                                        R$ {{moneyUStoBR($account->parcels->where('payment_status', 1)->sum('value') + $account->parcels->where('payment_status', 1)->sum('payment_interest'))}}</td>
                                 </tr>
                                 <tr>
                                     <th>Saldo devido:</th>
                                     <td>
-                                        R$ {{number_format($account->parcels->where('payment_status', 0)->sum('value'), 2, ',', '.')}}
+                                        R$ {{moneyUStoBR($account->parcels->where('payment_status', 0)->sum('value'))}}
                                     </td>
                                 </tr>
                                 </tbody>

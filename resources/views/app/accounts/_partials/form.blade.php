@@ -18,7 +18,7 @@
                          :disabled="$disableQtyInput"/>
             </div>
             <div class="form-group col-sm-2">
-                <x-input name="value" label="Valor Parcela" value="{{old('value') ?? @$data->value}}" oninput="formatCurrency(this)"/>
+                <x-input name="value" label="Valor Parcela" value="{{old('value') ?? @moneyUStoBR($data->value)}}" oninput="formatCurrency(this)"/>
             </div>
             <div class="form-group col-sm-2">
                 <x-input name="due_date" type="date" label="Vencimento" value="{{old('due_date') ?? @$data->due_date}}"
@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="form-group col-sm-2">
                     <x-input name="payment_interest" label="Juros/Mora"
-                             value="{{old('payment_interest') ?? @$data->payment_interest}}" oninput="formatCurrency(this)"/>
+                             value="{{old('payment_interest') ?? @moneyUStoBR($data->payment_interest)}}" oninput="formatCurrency(this)"/>
                 </div>
                 <div class="form-group col-sm-2">
                     <x-input name="payment" type="date" label="Data Pagamento"

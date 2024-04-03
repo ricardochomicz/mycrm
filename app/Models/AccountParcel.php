@@ -74,7 +74,7 @@ class AccountParcel extends Model
     protected function value(): Attribute
     {
         return Attribute::make(
-            get: fn (?string $value) => number_format($value, 2, ',', '.'),
+//            get: fn(?string $value) => (int)$value ? number_format($value, 2, ',', '.') : null,
             set: fn(?string $value) => floatval(str_replace(',', '.', str_replace('.', '', $value)))
         );
     }
@@ -82,16 +82,17 @@ class AccountParcel extends Model
     protected function paymentInterest(): Attribute
     {
         return Attribute::make(
-            get: fn(?string $value) => number_format($value, 2, ',', '.'),
+//            get: fn(?string $value) => is_numeric($value) ? number_format($value, 2, ',', '.') : null,
             set: fn(?string $value) => floatval(str_replace(',', '.', str_replace('.', '', $value)))
         );
     }
 
     public function getTotalAttribute(): float
     {
-        $value = (float) str_replace(',', '.', $this->value ?? 0);;
+        $value = (float) str_replace(',', '.', $this->value ?? 0);
         $interest = (float) str_replace(',', '.', $this->payment_interest ?? 0);
         return $value +  $interest;
     }
+
 
 }

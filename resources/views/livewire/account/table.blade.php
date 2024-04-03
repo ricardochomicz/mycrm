@@ -91,7 +91,7 @@
                                 <td class="align-middle">{{$d->account->revenueExpense->name}}<br>
                                     <small>{{$d->account->provider->name}}</small>
                                 </td>
-                                <td class="text-center align-middle">R$ {{$d->value}}</td>
+                                <td class="text-center align-middle">R$ {{moneyUStoBR($d->value)}}</td>
                                 <td class="text-center align-middle">{{Carbon\Carbon::parse($d->due_date)->format('d/m/Y')}}</td>
                                 <td class="text-center align-middle">
                                     @if ($d->payment_status == 1)

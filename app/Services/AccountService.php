@@ -65,6 +65,7 @@ class AccountService
             }
 
             $dataUpdate = [
+                'value' => $data['value'],
                 'payment' => $data['payment'],
                 'payment_interest' => $data['payment_interest'],
                 'payment_status' => $data['payment'] ? $data['payment_status'] = 1 : 0
