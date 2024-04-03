@@ -46,11 +46,11 @@
                             </thead>
                             <tbody>
                             @foreach($account->parcels as $p)
-                                <tr>
-                                    <td>{{$p->number_parcel}}</td>
-                                    <td class="text-center">R$ {{$p->value, 2}}</td>
-                                    <td class="text-center">{{Carbon\Carbon::parse($p->due_date)->format('d/m/Y')}}</td>
-                                    <td class="text-center">
+                                <tr ]@if($p->due_date < Carbon\Carbon::now()->format("Y-m-d") && $p->payment_status == 0) class="text-danger" @endif>
+                                    <td class="align-middle">{{$p->number_parcel}}</td>
+                                    <td class="text-center align-middle">R$ {{$p->value, 2}}</td>
+                                    <td class="text-center align-middle">{{Carbon\Carbon::parse($p->due_date)->format('d/m/Y')}}</td>
+                                    <td class="text-center align-middle">
                                         @if ($p->payment_status == 1)
                                             <span class="badge bg-success">Pago</span>
                                         @elseif ($p->due_date < Carbon\Carbon::now()->format("Y-m-d"))
@@ -64,14 +64,14 @@
                                             <span class="badge bg-secondary">Aberto</span>
                                         @endif
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center align-middle">
                                         @if($p->payment)
                                             {{Carbon\Carbon::parse($p->payment)->format('d/m/Y')}}
                                         @else
                                             -
                                         @endif
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center align-middle">
                                         @if($p->payment_status == 1)
                                             @php
                                                 $value = $account->parcels->where('payment_status', 1)->sum('value');
