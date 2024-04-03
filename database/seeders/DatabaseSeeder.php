@@ -7,6 +7,7 @@ use App\Models\Classification;
 use App\Models\Operator;
 use App\Models\OrderType;
 use App\Models\Plan;
+use App\Models\RevenueExpense;
 use App\Models\Role;
 use App\Models\Tenant;
 use App\Models\User;
@@ -128,5 +129,26 @@ class DatabaseSeeder extends Seeder
             OrderType::create($t);
         }
 
+        $revenues = [
+            [
+                'tenant_id' => $tenant->id,
+                'name' => 'Comissão',
+                'type' => 'credit'
+            ],
+            [
+                'tenant_id' => $tenant->id,
+                'name' => 'Salário',
+                'type' => 'credit'
+            ],
+            [
+                'tenant_id' => $tenant->id,
+                'name' => 'Outros Recebíveis',
+                'type' => 'credit'
+            ],
+        ];
+
+        foreach ($revenues as $r){
+            RevenueExpense::create($r);
+        }
     }
 }

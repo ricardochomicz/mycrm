@@ -14,22 +14,25 @@ return new class extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('tenant_id');
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('revenue_expense_id');
             $table->unsignedBigInteger('provider_id');
+            $table->unsignedBigInteger('user_id');
             $table->decimal('total');
-            $table->string('status')->default('EM ABERTO');
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('tenant_id')
                 ->references('id')
                 ->on('tenants');
-            $table->foreign('category_id')
+            $table->foreign('revenue_expense_id')
                 ->references('id')
-                ->on('categories');
+                ->on('revenue_expenses');
             $table->foreign('provider_id')
                 ->references('id')
                 ->on('providers');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
         });
     }
 

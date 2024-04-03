@@ -390,7 +390,7 @@ return [
                 ],
                 [
                     'text' => 'Contas Pagar/Receber',
-                    'url'  => '#',
+                    'url'  => 'app/accounts',
                     'icon' => 'fas fa-fw fa-cash-register mr-2',
                 ],
                 [

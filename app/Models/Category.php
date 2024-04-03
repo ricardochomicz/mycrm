@@ -19,8 +19,8 @@ class Category extends Model
         return $this->belongsTo(Tenant::class);
     }
 
-    public function scopeWhereTenantId($query, $tenant_id) {
-        return $query->where("tenant_id", $tenant_id);
+    public function scopeWhereTenantId($query) {
+        return $query->where("tenant_id", auth()->user()->tenant->id);
     }
 
     public function scopeFilter($query, array $filters): void

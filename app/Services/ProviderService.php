@@ -2,11 +2,18 @@
 
 namespace App\Services;
 
+use App\Models\Category;
 use App\Models\Provider;
 use Illuminate\Support\Facades\DB;
 
 class ProviderService
 {
+
+    public function toSelect($data = [])
+    {
+        return Provider::where('tenant_id', auth()->user()->tenant->id)
+            ->orderBy('name')->get(['id', 'name']);
+    }
 
     public function index($data)
     {

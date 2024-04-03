@@ -126,6 +126,14 @@ Route::group(['middleware' => 'auth', 'prefix' => 'app'], function () {
     Route::get('revenue-expenses/{id}/destroy', [\App\Http\Controllers\RevenueExpenseController::class, 'destroy'])->name('revenue-expenses.destroy');
 
 
+    Route::get('accounts/{id}/edit', [\App\Http\Controllers\AccountController::class, 'edit'])->name('accounts.edit');
+    Route::put('accounts/{id}', [\App\Http\Controllers\AccountController::class, 'update'])->name('accounts.update');
+    Route::get('accounts/create', [\App\Http\Controllers\AccountController::class, 'create'])->name('accounts.create');
+    Route::post('accounts', [\App\Http\Controllers\AccountController::class, 'store'])->name('accounts.store');
+    Route::get('accounts', [\App\Http\Controllers\AccountController::class, 'index'])->name('accounts.index');
+    Route::get('accounts/{id}/destroy', [\App\Http\Controllers\AccountController::class, 'destroy'])->name('accounts.destroy');
+    Route::get('accounts/{id}/detail', [\App\Http\Controllers\AccountController::class, 'accountDetail'])->name('accounts.detail');
+
     Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index');
 
 });
