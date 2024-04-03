@@ -47,7 +47,7 @@
                             @foreach($account->parcels as $p)
                                 <tr>
                                     <td>{{$p->number_parcel}}</td>
-                                    <td class="text-center">R$ {{number_format($p->value, 2, ',', '.')}}</td>
+                                    <td class="text-center">R$ {{$p->value, 2}}</td>
                                     <td class="text-center">{{Carbon\Carbon::parse($p->due_date)->format('d/m/Y')}}</td>
                                     <td class="text-center">
                                         @if ($p->payment_status == 1)
