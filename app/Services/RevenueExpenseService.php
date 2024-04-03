@@ -86,11 +86,11 @@ class RevenueExpenseService
         $result = [];
         $obj = new \stdClass();
         $obj->id = "credit";
-        $obj->name = 'Crédito';
+        $obj->name = 'Receita';
         $result[] = $obj;
         $obj = new \stdClass();
         $obj->id = "debit";
-        $obj->name = 'Débito';
+        $obj->name = 'Despesa';
         $result[] = $obj;
         return $result;
     }

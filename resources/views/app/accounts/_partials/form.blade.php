@@ -4,11 +4,11 @@
         <div class="row">
             <div class="form-group col-sm-4">
                 <x-select :options="$providers" name="provider_id" label="Fornecedor" title="Selecione..."
-                          value="{{old('provider_id') ?? @$data->account->provider_id}}"/>
+                          value="{{old('provider_id') ?? @$data->account->provider_id}}" data-size="5"/>
             </div>
             <div class="form-group col-sm-4">
                 <x-select :options="$revenues" name="revenue_expense_id" label="Tipo Receita/Despesa"
-                          title="Selecione..."
+                          title="Selecione..." data-size="5"
                           value="{{old('revenue_expense_id') ?? @$data->account->revenue_expense_id}}"/>
             </div>
         </div>
