@@ -154,7 +154,7 @@ class AccountService
             if (!empty($revenue_expense)) {
                 $query->whereIn('revenue_expense_id', $revenue_expense);
             }
-        })->where(['tenant_id' => auth()->user()->tenant->id, 'payment_status' => 1])->sum(DB::raw('value + payment_interest'));
+        })->where(['tenant_id' => auth()->user()->tenant->id, 'payment_status' => 1])->sum('amount_paid');
     }
 
 
