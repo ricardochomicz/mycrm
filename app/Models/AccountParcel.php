@@ -53,31 +53,54 @@ class AccountParcel extends Model
 
     public function scopeFilter($query, array $filters): void
     {
-        $query->when($filters['revenue_expense'] ?? null, function ($query, $search) use ($filters) {
-            $query->whereHas('account', function ($query) use ($search) {
-                $query->whereIn('revenue_expense_id', $search);
-            });
-        });
-
-        $query->when($filters['trashed'] ?? null, function ($query, $trashed) {
-            if ($trashed === 'only') {
-                $query->onlyTrashed();
-            }
-            if ($trashed === 'arrears') {
-                $query->where('payment_status', 0)
-                    ->where(function ($query) {
-                        $query->where('due_date', '<', Carbon::now()->toDateString())
-                            ->orWhereNull('due_date');
-                    });
-            }
-        });
-
+//        $query->when($filters['revenue_expense'] ?? null, function ($query, $search) use ($filters) {
+//            $query->whereHas('account', function ($query) use ($search) {
+//                $query->whereIn('revenue_expense_id', $search);
+//            })->where(function ($query) {
+//                $query->where('due_date', '<', Carbon::now()->toDateString())
+//                    ->orWhereNull('due_date');
+//            });
+//        });
+//
+//        $query->when($filters['trashed'] ?? null, function ($query, $trashed) {
+//            if ($trashed === 'only') {
+//                $query->onlyTrashed();
+//            }
+//            if ($trashed === 'arrears') {
+//                $query->where('payment_status', 0)
+//                    ->where(function ($query) {
+//                        $query->where('due_date', '<', Carbon::now()->toDateString())
+//                            ->orWhereNull('due_date');
+//                    });
+//            }
+//        });
+//
+//        if ($filters['trashed'] === 'arrears') {
+//            $query->where('payment_status', 0)
+//                ->where(function ($query) {
+//                    $query->where('due_date', '<', Carbon::now()->toDateString())
+//                        ->orWhereNull('due_date');
+//                });
+//        } else {
+//            $query->when(!($filters['trashed'] || $filters['revenue_expense'] || $filters['date_start'] && $filters['date_end']), function ($query) use ($filters) {
+//                $query->whereMonth('due_date', Carbon::now()->month);
+//            }, function ($query) use ($filters) {
+//                $query->whereBetween('due_date', [$filters['date_start'], $filters['date_end']]);
+//            });
+//        }
         if ($filters['trashed'] === 'arrears') {
             $query->where('payment_status', 0)
                 ->where(function ($query) {
                     $query->where('due_date', '<', Carbon::now()->toDateString())
                         ->orWhereNull('due_date');
                 });
+        } elseif ($filters['revenue_expense'] ?? null) {
+            $query->whereHas('account', function ($query) use ($filters) {
+                $query->whereIn('revenue_expense_id', $filters['revenue_expense']);
+            })->where(function ($query) {
+                $query->where('due_date', '<=', Carbon::now()->toDateString())
+                    ->orWhere('due_date', '>=', Carbon::now()->toDateString());
+            });
         } else {
             $query->when(!($filters['trashed'] || $filters['revenue_expense'] || $filters['date_start'] && $filters['date_end']), function ($query) use ($filters) {
                 $query->whereMonth('due_date', Carbon::now()->month);
@@ -85,7 +108,6 @@ class AccountParcel extends Model
                 $query->whereBetween('due_date', [$filters['date_start'], $filters['date_end']]);
             });
         }
-
     }
 
 
