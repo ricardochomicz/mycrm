@@ -18,7 +18,7 @@ class Invoice extends Model
         'value',
         'tax',
         'status',
-        'obs'
+        'description'
     ];
 
     public function tenant(): \Illuminate\Database\Eloquent\Relations\BelongsTo

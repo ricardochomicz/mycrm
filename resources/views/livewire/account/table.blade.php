@@ -5,17 +5,16 @@
 
             <h6><i class="fas fa-filter"></i> Filtros</h6>
             <div class="row">
-                <div class="form-group col-sm-3" wire:ignore>
-                    <x-select :options="$revenues" title="Tipo Receita/Despesa" wire:model.live="revenue_expense"
-                              id="sel2" multiple/>
-                </div>
                 <div class="form-group col-sm-2">
                     <input wire:model="date_start" type="date" class="form-control" name="date_start">
                 </div>
                 <div class="form-group col-sm-2">
                     <input wire:model="date_end" type="date" class="form-control" name="date_end">
                 </div>
-
+                <div class="form-group col-sm-3" wire:ignore>
+                    <x-select :options="$revenues" title="Tipo Receita/Despesa" wire:model.live="revenue_expense"
+                              id="sel2" multiple/>
+                </div>
                 <div class="form-group col-sm-3" wire:ignore>
                     <select name="trashed" data-live-search="true" title="Status" id="sel1" wire:model.live="trashed"
                             class="selectpicker">

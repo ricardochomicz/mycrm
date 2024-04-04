@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('tenant_id');
             $table->string('taker'); //tomador serviço
-            $table->date('issuance date'); //data emissão
+            $table->date('issuance_date'); //data emissão
             $table->string('number_nf'); //número nf
             $table->decimal('value', 10,2);
             $table->decimal('tax', 10,2); //imposto
+            $table->string('description')->nullable();
             $table->string('status')->default('Pendente');
-            $table->text('obs')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
