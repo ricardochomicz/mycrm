@@ -42,6 +42,7 @@
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Pagamento</th>
                                 <th class="text-center">Total Pago</th>
+                                <th class="text-center">Juros</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -73,12 +74,12 @@
                                     </td>
                                     <td class="text-center align-middle">
                                         @if($p->payment_status == 1)
-                                            @php
-                                                $value = $account->parcels->where('payment_status', 1)->sum('value');
-                                                $interest = $account->parcels->where('payment_status', 1)->sum('payment_interest');
-                                                $total = $value + $interest;
-                                            @endphp
-                                            R$ {{number_format($total, 2, ',', '.')}}
+                                            R$ {{moneyUStoBR($p->amount_paid)}}
+                                        @endif
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        @if($p->payment_status == 1)
+                                            R$ {{moneyUStoBR($p->payment_interest)}}
                                         @endif
                                     </td>
                                 </tr>
@@ -106,7 +107,7 @@
                                     <td>{{$account->parcels->count('number_parcel')}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Juros/Multa:</th>
+                                    <th>Juros/Multa (Total):</th>
                                     <td>
                                         R$ {{moneyUStoBR($account->parcels->sum('payment_interest'))}}
                                     </td>

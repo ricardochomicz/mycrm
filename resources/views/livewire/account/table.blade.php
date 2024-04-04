@@ -117,7 +117,7 @@
                                 </td>
                                 <td class="text-center align-middle">
                                     @if($d->payment_status == 1)
-                                        R$ {{number_format($d->total, 2, ',', '.')}}
+                                        R$ {{moneyUStoBR($d->amount_paid)}}
                                     @endif
                                 </td>
 

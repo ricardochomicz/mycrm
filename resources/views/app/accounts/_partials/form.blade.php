@@ -18,7 +18,7 @@
                          :disabled="$disableQtyInput"/>
             </div>
             <div class="form-group col-sm-2">
-                <x-input name="value" label="Valor Parcela" value="{{old('value') ?? @moneyUStoBR($data->value)}}" oninput="formatCurrency(this)"/>
+                <x-input name="value" label="Valor Parcela" id="value" value="{{old('value') ?? @moneyUStoBR($data->value)}}" oninput="formatCurrency(this)"/>
             </div>
             <div class="form-group col-sm-2">
                 <x-input name="due_date" type="date" label="Vencimento" value="{{old('due_date') ?? @$data->due_date}}"
@@ -33,8 +33,12 @@
         @if(Route::currentRouteNamed('accounts.edit'))
             <div class="row">
                 <div class="form-group col-sm-2">
-                    <x-input name="payment_interest" label="Juros/Mora"
-                             value="{{old('payment_interest') ?? @moneyUStoBR($data->payment_interest)}}" oninput="formatCurrency(this)"/>
+                    <x-input name="amount_paid" label="Valor Pago" id="amount_paid"
+                             value="{{old('amount_paid') ?? @moneyUStoBR(@$data->amount_paid)}}" oninput="formatCurrency(this)"/>
+                </div>
+                <div class="form-group col-sm-2">
+                    <x-input name="payment_interest" label="Juros/Mora" id="payment_interest"
+                             value="{{old('payment_interest') ?? moneyUStoBR(@$data->payment_interest)}}" />
                 </div>
                 <div class="form-group col-sm-2">
                     <x-input name="payment" type="date" label="Data Pagamento"
@@ -62,19 +66,40 @@
     <script>
         function formatCurrency(input) {
             let valor = input.value;
-            valor = valor.replace(/\D/g, '');
-            valor = (parseInt(valor) / 100).toLocaleString('pt-BR', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            });
-            if (valor === 'NaN') {
-                input.value = '';
-            } else {
-                input.value = valor;
+                valor = valor.replace(/\D/g, '');
+                valor = (parseInt(valor) / 100).toLocaleString('pt-BR', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+                if (valor === 'NaN') {
+                    input.value = '';
+                } else {
+                    input.value = valor;
             }
         }
         let campo = document.querySelector('textarea');
         campo.value = campo.value.trim();
+
+        const valueInput = document.getElementById('value')
+        const amount_paid = document.getElementById('amount_paid')
+        const payment_interest = document.getElementById('payment_interest')
+
+        amount_paid.addEventListener('input', calculatePaymentInterest)
+
+        function calculatePaymentInterest() {
+            const value = parseFloat(valueInput.value.replace(',', '.'));
+
+            const amountPaid = parseFloat(amount_paid.value.replace(',', '.'));
+            console.log(amountPaid)
+            if (!isNaN(value) && !isNaN(amountPaid)) {
+                const paymentInterest = amountPaid - value;
+                payment_interest.value = paymentInterest.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+                // payment_interest.value = paymentInterest.toFixed(2);
+
+            } else {
+                payment_interest.value = ''; // Se um dos valores for inválido, limpa o campo de pagamento de juros
+            }
+        }
 
     </script>
 @endpushonce

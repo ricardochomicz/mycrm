@@ -57,6 +57,7 @@ class AccountService
 
     public function updateParcel($data, $id)
     {
+
         try {
             DB::beginTransaction();
 
@@ -69,6 +70,7 @@ class AccountService
             $dataUpdate = [
                 'value' => $data['value'],
                 'payment' => $data['payment'],
+                'amount_paid' => $data['amount_paid'],
                 'payment_interest' => $data['payment_interest'],
                 'payment_status' => $data['payment'] ? $data['payment_status'] = 1 : 0
             ];

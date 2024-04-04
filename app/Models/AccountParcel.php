@@ -24,6 +24,7 @@ class AccountParcel extends Model
         'value',
         'due_date',
         'payment',
+        'amount_paid',
         'payment_status',
         'payment_interest'
     ];
@@ -87,6 +88,13 @@ class AccountParcel extends Model
     }
 
     protected function value(): Attribute
+    {
+        return Attribute::make(
+            set: fn(?string $value) => floatval(str_replace(',', '.', str_replace('.', '', $value)))
+        );
+    }
+
+    protected function amountPaid(): Attribute
     {
         return Attribute::make(
             set: fn(?string $value) => floatval(str_replace(',', '.', str_replace('.', '', $value)))
