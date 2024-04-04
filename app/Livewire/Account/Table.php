@@ -49,11 +49,11 @@ class Table extends Component
         return view('livewire.account.table', [
             'data' => $accounts->index($filters),
             'revenues' => $revenues->toSelect(),
-            'totalMonth' => $this->totalMonth(),
-            'totalPaid' => $this->totalPaid(),
-            'totalArrears' => $this->totalArrears(),
-            'totalCommission' => $this->totalCommission(),
-            'balance' => $this->balance()
+            'totalMonth' => $accounts->totalMonth($this->revenue_expense, $this->date_start, $this->date_end),
+            'totalPaid' => $accounts->totalPaid($this->revenue_expense, $this->date_start, $this->date_end),
+            'totalArrears' => $accounts->totalArrears($this->revenue_expense),
+            'totalCommission' => $accounts->totalCommission($this->date_start, $this->date_end),
+            'balance' => $accounts->balance($this->revenue_expense, $this->date_start, $this->date_end)
         ]);
     }
 
@@ -66,63 +66,4 @@ class Table extends Component
         $this->emit('resetSelectpicker');
     }
 
-    public function totalMonth()
-    {
-        return AccountParcel::whereHas('account', function ($query) {
-            $query->whereNotIn('revenue_expense_id', [1, 2, 3])
-                ->where(['tenant_id' => auth()->user()->tenant->id]);
-                 if (!empty($this->revenue_expense)) {
-                     $query->whereIn('revenue_expense_id', $this->revenue_expense);
-                 }
-        })
-            ->whereBetween('due_date', [$this->date_start, $this->date_end])->sum('value');
-    }
-
-//    public function totalDay()
-//    {
-//        return AccountParcel::whereHas('account', function ($query) {
-//            $query->whereNotIn('revenue_expense_id', [1, 2, 3])
-//                ->whereBetween('due_date', [$this->date_start, $this->date_end]);
-//        })->where(['tenant_id' => auth()->user()->tenant->id, 'payment_status' => 0])
-//            ->whereDate('due_date', Carbon::now()->toDateString())->sum('value');
-//    }
-
-    public function totalArrears()
-    {
-        return AccountParcel::whereHas('account', function ($query) {
-            $query->whereNotIn('revenue_expense_id', [1, 2, 3])
-                ->where(['tenant_id' => auth()->user()->tenant->id, 'payment_status' => 0]);
-                 if (!empty($this->revenue_expense)) {
-                     $query->whereIn('revenue_expense_id', $this->revenue_expense);
-                 }
-        })->whereDate('due_date', '<', Carbon::now()->toDateString())->sum('value');
-    }
-
-    public function totalPaid()
-    {
-        return AccountParcel::whereHas('account', function ($query) {
-            $query->whereNotIn('revenue_expense_id', [1, 2, 3])
-                ->whereBetween('payment', [$this->date_start, $this->date_end]);
-            if (!empty($this->revenue_expense)) {
-                $query->whereIn('revenue_expense_id', $this->revenue_expense);
-            }
-        })->where(['tenant_id' => auth()->user()->tenant->id, 'payment_status' => 1])->sum('value');
-//            ->whereMonth('payment', Carbon::now()->month)->sum('value');
-    }
-
-    public function totalCommission()
-    {
-        return AccountParcel::whereHas('account', function ($query) {
-            $query->whereIn('revenue_expense_id', [1, 2, 3])
-                ->whereBetween('due_date', [$this->date_start, $this->date_end]);
-        })
-            ->where(['tenant_id' => auth()->user()->tenant->id])
-            ->whereMonth('created_at', Carbon::now()->month)
-            ->sum('value');
-    }
-
-    public function balance()
-    {
-        return $this->totalCommission() - $this->totalPaid();
-    }
 }

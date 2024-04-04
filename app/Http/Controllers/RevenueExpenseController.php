@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\ProviderService;
 use App\Services\RevenueExpenseService;
 use Illuminate\Http\Request;
 
 class RevenueExpenseController extends Controller
 {
-    public function __construct(protected RevenueExpenseService $revenueService)
+    public function __construct(
+        protected RevenueExpenseService $revenueService,
+    )
     {
     }
 
