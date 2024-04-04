@@ -53,13 +53,12 @@ class AccountParcel extends Model
 
     public function scopeFilter($query, array $filters): void
     {
-        $query->when($filters['revenue_expense'] ?? null, function ($query, $search) {
-            $query->where(function ($query) use ($search) {
-                $query->whereHas('account', function ($query) use ($search) {
-                    $query->whereIn('revenue_expense_id', $search);
-                });
+        $query->when($filters['revenue_expense'] ?? null, function ($query, $search) use ($filters) {
+            $query->whereHas('account', function ($query) use ($search) {
+                $query->whereIn('revenue_expense_id', $search);
             });
         });
+
         $query->when($filters['trashed'] ?? null, function ($query, $trashed) {
             if ($trashed === 'only') {
                 $query->onlyTrashed();
@@ -72,6 +71,7 @@ class AccountParcel extends Model
                     });
             }
         });
+
         if ($filters['trashed'] === 'arrears') {
             $query->where('payment_status', 0)
                 ->where(function ($query) {
@@ -79,13 +79,15 @@ class AccountParcel extends Model
                         ->orWhereNull('due_date');
                 });
         } else {
-            $query->when(!($filters['trashed'] || $filters['date_start'] && $filters['date_end']), function ($query) use ($filters) {
+            $query->when(!($filters['trashed'] || $filters['revenue_expense'] || $filters['date_start'] && $filters['date_end']), function ($query) use ($filters) {
                 $query->whereMonth('due_date', Carbon::now()->month);
             }, function ($query) use ($filters) {
                 $query->whereBetween('due_date', [$filters['date_start'], $filters['date_end']]);
             });
         }
+
     }
+
 
     protected function value(): Attribute
     {
@@ -110,9 +112,9 @@ class AccountParcel extends Model
 
     public function getTotalAttribute(): float
     {
-        $value = (float) str_replace(',', '.', $this->value ?? 0);
-        $interest = (float) str_replace(',', '.', $this->payment_interest ?? 0);
-        return $value +  $interest;
+        $value = (float)str_replace(',', '.', $this->value ?? 0);
+        $interest = (float)str_replace(',', '.', $this->payment_interest ?? 0);
+        return $value + $interest;
     }
 
 
