@@ -142,26 +142,17 @@ class AccountService
                 $query->whereIn('revenue_expense_id', $revenue_expense);
             }
         })
-            ->where(['tenant_id' => auth()->user()->tenant->id])->sum('value');
+            ->whereBetween('due_date', [$date_start, $date_end])->sum('value');
     }
 
 
-    public function totalPaid($revenue_expense, $date_start = null, $date_end = null)
+    public function totalPaid($revenue_expense, $date_start, $date_end)
     {
         return AccountParcel::whereHas('account', function ($query) use ($revenue_expense, $date_start, $date_end) {
-            $query->whereNotIn('revenue_expense_id', [1, 2, 3]);
-//                ->whereBetween('payment', [$date_start, $date_end]);
-//            if (!empty($revenue_expense)) {
-//                $query->whereIn('revenue_expense_id', $revenue_expense)
-//                    ->orWhereNull('payment');
-//            }
+            $query->whereNotIn('revenue_expense_id', [1, 2, 3])
+                ->whereBetween('payment', [$date_start, $date_end]);
             if (!empty($revenue_expense)) {
-                $query->whereIn('revenue_expense_id', $revenue_expense)
-                    ->orWhereNull('revenue_expense_id');
-            }
-
-            if ($date_start && $date_end) {
-                $query->whereBetween('due_date', [$date_start, $date_end]);
+                $query->whereIn('revenue_expense_id', $revenue_expense);
             }
         })->where(['tenant_id' => auth()->user()->tenant->id, 'payment_status' => 1])->sum('amount_paid');
     }
